@@ -18,7 +18,7 @@ class GuessNumber extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Guess Number';
 
     protected $number = 0;
     protected $guessNumber = 0;

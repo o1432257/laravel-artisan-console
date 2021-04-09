@@ -69,11 +69,11 @@ class GuessNumber extends Command
 
             $this->setGuessNumber($this->ask(' 0-100 猜個數字'));
 
-            if (!is_numeric($this->guessNumber))
+            if (is_numeric($this->guessNumber))
             {
-                $this->warn('猜數字好嗎');
-            }else{
                 $this->checkHighLow();
+            }else{
+                $this->warn('猜數字好嗎');
             }
 
         } else {

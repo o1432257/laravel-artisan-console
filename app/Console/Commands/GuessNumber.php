@@ -65,20 +65,16 @@ class GuessNumber extends Command
     {
         $this->newRound();
 
-        if ($this->round <= 10){
+        if ($this->round > 10){
+            return $this->warn('你好爛喔 都猜10次了');
+        } 
+        $this->setGuessNumber($this->ask(' 0-100 猜個數字'));
 
-            $this->setGuessNumber($this->ask(' 0-100 猜個數字'));
-
-            if (is_numeric($this->guessNumber))
-            {
-                $this->checkHighLow();
-            }else{
-                $this->warn('猜數字好嗎');
-            }
-
-        } else {
-            $this->warn('你好爛喔 都猜10次了');
+        if (!is_numeric($this->guessNumber)) {
+            return $this->warn('猜數字好嗎');
         }
+        
+        return $this->checkHighLow();
     }
 
     protected function checkHighLow()
@@ -86,14 +82,15 @@ class GuessNumber extends Command
         if ($this->number > $this->guessNumber)
         {
             $this->info("$this->guessNumber 太低");
-            $this->guessNumber();
-        }else if ($this->number < $this->guessNumber)
+            return $this->guessNumber();
+        }
+        
+        if ($this->number < $this->guessNumber)
         {
             $this->info("$this->guessNumber 太高");
-            $this->guessNumber();
-        }else{
-            $this->info('恭喜你 猜中了!!');
+            return $this->guessNumber();
         }
 
+        return $this->info('恭喜你 猜中了!!');
     }
 }

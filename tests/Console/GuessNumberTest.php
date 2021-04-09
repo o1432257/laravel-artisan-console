@@ -2,7 +2,7 @@
 
 namespace Tests\Console;
 
-class ExampleTest extends TestCase
+class GuessNumberTest extends TestCase
 {
     /**
      * A basic test example.
@@ -11,6 +11,8 @@ class ExampleTest extends TestCase
      */
     public function test_console_guess_number()
     {
-        $this->artisan('guess:number');
+        $this->artisan('guess:number')
+        ->expectsQuestion(' 0-100 猜個數字', '77')
+        ->assertExitCode(0); 
     }
 }
